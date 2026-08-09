@@ -50,7 +50,7 @@
     z-index: 1;
     max-width: 900px;
     margin: 0 auto;
-    padding: 22px 14px 60px;
+    padding: 78px 14px 60px;
   }
 
   header.top {
@@ -60,6 +60,10 @@
     padding: 10px 6px 22px;
     border-bottom: 1px solid rgba(255,255,255,0.08);
     margin-bottom: 20px;
+    max-height: 200px;
+    opacity: 1;
+    overflow: hidden;
+    transition: max-height 0.28s ease, opacity 0.2s ease, padding 0.28s ease, margin 0.28s ease, border-color 0.28s ease;
   }
 
   .logo {
@@ -90,6 +94,149 @@
     color: var(--muted);
   }
 
+  .search-wrap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    padding: 10px 14px 12px;
+    background: linear-gradient(180deg, rgba(7,2,15,0.98) 0%, rgba(7,2,15,0.98) 78%, rgba(7,2,15,0) 100%);
+    backdrop-filter: blur(6px);
+  }
+
+  .search-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .search-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .search-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-width: 0;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 14px;
+    padding: 0 12px;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .search-box:focus-within {
+    border-color: rgba(255,47,176,0.6);
+    box-shadow: 0 0 0 3px rgba(255,47,176,0.12), 0 0 18px rgba(41,224,255,0.15);
+  }
+
+  .search-icon {
+    font-size: 15px;
+    opacity: 0.55;
+    flex-shrink: 0;
+  }
+
+  #searchInput {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text);
+    font-size: 16px;
+    font-family: inherit;
+    padding: 11px 8px;
+    min-width: 0;
+    -webkit-appearance: none;
+  }
+
+  #searchInput::placeholder {
+    color: var(--muted);
+  }
+
+  .search-clear {
+    display: none;
+    background: rgba(255,255,255,0.10);
+    border: none;
+    color: var(--text);
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    font-size: 13px;
+    line-height: 1;
+    cursor: pointer;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .search-clear.show { display: flex; }
+
+  .search-cancel {
+    display: none;
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    color: var(--cyan-soft);
+    font-size: 14px;
+    font-weight: 600;
+    font-family: inherit;
+    padding: 8px 2px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .search-cancel.show { display: block; }
+
+  .search-status {
+    margin: 8px 2px 0;
+    font-size: 12px;
+    color: var(--muted);
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.12s ease;
+  }
+
+  .search-status.show {
+    height: auto;
+    opacity: 1;
+  }
+
+  body.search-mode .top,
+  body.search-mode .intro,
+  body.search-mode footer.foot {
+    max-height: 0;
+    opacity: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    border-color: transparent;
+  }
+
+  body.search-mode .section:first-of-type {
+    margin-top: 0;
+  }
+
+  .no-results {
+    display: none;
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    padding: 20px 10px;
+    border: 1px dashed rgba(255,255,255,0.15);
+    border-radius: 12px;
+  }
+
+  .no-results.show { display: block; }
+
+  .section.hidden { display: none; }
+  .chip.hidden { display: none; }
+
   .intro {
     background: linear-gradient(135deg, rgba(255,47,176,0.12), rgba(41,224,255,0.10));
     border: 1px solid rgba(255,255,255,0.10);
@@ -99,6 +246,10 @@
     font-size: 14px;
     color: var(--text);
     line-height: 1.5;
+    max-height: 220px;
+    opacity: 1;
+    overflow: hidden;
+    transition: max-height 0.28s ease, opacity 0.2s ease, padding 0.28s ease, margin 0.28s ease, border-color 0.28s ease;
   }
 
   .intro b { color: var(--cyan-soft); }
@@ -118,6 +269,7 @@
 
   .section {
     margin-bottom: 30px;
+    transition: margin-top 0.28s ease;
   }
 
   .section-header {
@@ -152,6 +304,19 @@
 
   @media (max-width: 380px) {
     .grid { gap: 7px 8px; }
+  }
+
+  @media (max-width: 340px) {
+    .chip-text { font-size: 12.5px; }
+  }
+
+  /* Wider screens: Telegram Desktop, tablets, iPad */
+  @media (min-width: 680px) {
+    .grid { grid-template-columns: repeat(3, 1fr); gap: 9px 12px; }
+  }
+
+  @media (min-width: 980px) {
+    .grid { grid-template-columns: repeat(4, 1fr); gap: 10px 14px; }
   }
 
   .chip {
@@ -241,6 +406,10 @@
     margin-top: 34px;
     padding-top: 18px;
     border-top: 1px solid rgba(255,255,255,0.08);
+    max-height: 100px;
+    opacity: 1;
+    overflow: hidden;
+    transition: max-height 0.28s ease, opacity 0.2s ease, padding 0.28s ease, margin 0.28s ease, border-color 0.28s ease;
   }
 
   footer.foot .brandline {
@@ -265,6 +434,20 @@
     </div>
   </header>
 
+  <div class="search-wrap">
+    <div class="search-inner">
+      <div class="search-row">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="searchInput" placeholder="Найти артиста..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" oninput="filterArtists(this.value)">
+          <button class="search-clear" id="searchClear" onclick="clearSearch()">✕</button>
+        </div>
+        <button class="search-cancel" id="searchCancel" onclick="exitSearch()">Отмена</button>
+      </div>
+      <div class="search-status" id="searchStatus"></div>
+    </div>
+  </div>
+
   <div class="intro">
     Нажми на <b>имя артиста</b>, чтобы скопировать его никнейм — и вставь в чат с ботом, чтобы сгенерировать песню в его стиле 🎶
     <div class="counter">✨ Всего артистов: 290</div>
@@ -273,9 +456,10 @@
   <div class="section ru">
     <div class="section-header">
       <h2 class="section-title ru">🇷🇺 СНГ артисты</h2>
-      <span class="section-count">91</span>
+      <span class="section-count" id="countRu">91</span>
     </div>
-    <div class="grid">
+    <div class="no-results" id="noResultsRu">Ничего не найдено 🤷</div>
+    <div class="grid" id="gridRu">
 <button class="chip" data-name="25/17" onclick="copyName(this)"><span class="chip-text">25/17</span><span class="chip-icon">⧉</span></button>
 <button class="chip" data-name="Anacondaz" onclick="copyName(this)"><span class="chip-text">Anacondaz</span><span class="chip-icon">⧉</span></button>
 <button class="chip" data-name="Artik &amp; Asti" onclick="copyName(this)"><span class="chip-text">Artik &amp; Asti</span><span class="chip-icon">⧉</span></button>
@@ -373,9 +557,10 @@
   <div class="section intl">
     <div class="section-header">
       <h2 class="section-title intl">🌍 Мировые артисты</h2>
-      <span class="section-count">199</span>
+      <span class="section-count" id="countIntl">199</span>
     </div>
-    <div class="grid">
+    <div class="no-results" id="noResultsIntl">Ничего не найдено 🤷</div>
+    <div class="grid" id="gridIntl">
 <button class="chip" data-name="$uicideboy$" onclick="copyName(this)"><span class="chip-text">$uicideboy$</span><span class="chip-icon">⧉</span></button>
 <button class="chip" data-name="070 Shake" onclick="copyName(this)"><span class="chip-text">070 Shake</span><span class="chip-icon">⧉</span></button>
 <button class="chip" data-name="2 Chainz" onclick="copyName(this)"><span class="chip-text">2 Chainz</span><span class="chip-icon">⧉</span></button>
@@ -600,6 +785,190 @@ function fallbackCopy(text) {
   try { document.execCommand('copy'); } catch (e) {}
   document.body.removeChild(ta);
 }
+
+function normalize(str) {
+  return str.toLowerCase().replace(/ё/g, 'е');
+}
+
+function getTokens(name) {
+  return normalize(name).split(/[^\p{L}\p{N}$]+/gu).filter(Boolean);
+}
+
+/* ---------- Cross-script phonetic search engine ---------- */
+/* Lets "гон флад" find "GONE.Fludd" and "битлз" find "The Beatles" */
+
+const CYR2LAT = {
+  'а':'a','б':'b','в':'v','г':'g','д':'d','е':'e','ё':'e','ж':'zh','з':'z','и':'i','й':'i',
+  'к':'k','л':'l','м':'m','н':'n','о':'o','п':'p','р':'r','с':'s','т':'t','у':'u','ф':'f',
+  'х':'h','ц':'ts','ч':'ch','ш':'sh','щ':'sch','ъ':'','ы':'i','ь':'','э':'e','ю':'yu','я':'ya'
+};
+
+function transliterate(str) {
+  let out = '';
+  for (const ch of str) {
+    out += CYR2LAT.hasOwnProperty(ch) ? CYR2LAT[ch] : ch;
+  }
+  return out;
+}
+
+function simplifyPhonetic(str) {
+  let s = str.toLowerCase().replace(/[^a-z0-9]/g, '');
+  s = s.replace(/([a-z])\1+/g, '$1');
+  const rules = [
+    [/dzh/g, 'j'], [/tch/g, 'ch'], [/dge/g, 'j'],
+    [/ph/g, 'f'], [/wh/g, 'w'], [/kh/g, 'h'], [/th/g, 't'],
+    [/ck/g, 'k'], [/qu/g, 'kw'],
+    [/ea/g, 'i'], [/ee/g, 'i'], [/oo/g, 'u'], [/ou/g, 'au'],
+    [/ai/g, 'ei'], [/ay/g, 'ei'], [/ey/g, 'ei'], [/oy/g, 'oi'],
+    [/ce/g, 'se'], [/ci/g, 'si'], [/cy/g, 'si'], [/c/g, 'k'],
+    [/x/g, 'ks']
+  ];
+  rules.forEach(function(r) { s = s.replace(r[0], r[1]); });
+  s = s.replace(/([a-z])\1+/g, '$1');
+  if (s.length > 3 && s.endsWith('e') && !'aeiou'.includes(s[s.length - 2])) {
+    s = s.slice(0, -1);
+  }
+  return s;
+}
+
+function computePhoneticKey(word) {
+  const hasCyrillic = /[а-яё]/i.test(word);
+  const latinized = hasCyrillic ? transliterate(word.toLowerCase()) : word.toLowerCase();
+  return simplifyPhonetic(latinized);
+}
+
+function levenshtein(a, b) {
+  const m = a.length, n = b.length;
+  if (m === 0) return n;
+  if (n === 0) return m;
+  const dp = new Array(n + 1);
+  for (let j = 0; j <= n; j++) dp[j] = j;
+  for (let i = 1; i <= m; i++) {
+    let prev = dp[0];
+    dp[0] = i;
+    for (let j = 1; j <= n; j++) {
+      const temp = dp[j];
+      dp[j] = Math.min(dp[j] + 1, dp[j - 1] + 1, prev + (a[i - 1] === b[j - 1] ? 0 : 1));
+      prev = temp;
+    }
+  }
+  return dp[n];
+}
+
+function isCyrillicWord(word) {
+  return /[а-яё]/i.test(word);
+}
+
+function wordMatchesToken(qw, qwPhon, rawToken, phonToken) {
+  if (rawToken.startsWith(qw)) return true;
+  if (phonToken.startsWith(qwPhon)) return true;
+  const crossScript = isCyrillicWord(qw) !== isCyrillicWord(rawToken);
+  if (crossScript && qwPhon.length >= 4) {
+    const cmpLen = Math.min(phonToken.length, Math.max(qwPhon.length, 3));
+    const prefix = phonToken.slice(0, cmpLen);
+    const dist = levenshtein(qwPhon, prefix);
+    const threshold = qwPhon.length <= 4 ? 1 : (qwPhon.length <= 7 ? 2 : 3);
+    if (dist <= threshold) return true;
+  }
+  return false;
+}
+
+function matchesQuery(rawTokens, phonTokens, query) {
+  const qWords = getTokens(query);
+  if (qWords.length === 0) return true;
+  return qWords.every(function(qw) {
+    const qwPhon = computePhoneticKey(qw);
+    for (let i = 0; i < rawTokens.length; i++) {
+      if (wordMatchesToken(qw, qwPhon, rawTokens[i], phonTokens[i])) return true;
+    }
+    return false;
+  });
+}
+
+let artistIndexBuilt = false;
+function buildArtistIndex() {
+  if (artistIndexBuilt) return;
+  document.querySelectorAll('.chip').forEach(function(chip) {
+    const name = chip.getAttribute('data-name');
+    const rawTokens = getTokens(name);
+    chip._rawTokens = rawTokens;
+    chip._phonTokens = rawTokens.map(computePhoneticKey);
+  });
+  artistIndexBuilt = true;
+}
+
+function filterArtists(query) {
+  buildArtistIndex();
+  const q = normalize(query.trim());
+  const clearBtn = document.getElementById('searchClear');
+  const status = document.getElementById('searchStatus');
+  clearBtn.classList.toggle('show', query.length > 0);
+
+  const groups = [
+    { gridId: 'gridRu', countId: 'countRu', noResId: 'noResultsRu', total: 91 },
+    { gridId: 'gridIntl', countId: 'countIntl', noResId: 'noResultsIntl', total: 199 }
+  ];
+
+  let totalMatches = 0;
+
+  groups.forEach(function(g) {
+    const grid = document.getElementById(g.gridId);
+    const chips = grid.querySelectorAll('.chip');
+    let matches = 0;
+    chips.forEach(function(chip) {
+      const isMatch = q === '' || matchesQuery(chip._rawTokens, chip._phonTokens, q);
+      chip.classList.toggle('hidden', !isMatch);
+      if (isMatch) matches++;
+    });
+    document.getElementById(g.countId).textContent = q === '' ? g.total : matches;
+    document.getElementById(g.noResId).classList.toggle('show', q !== '' && matches === 0);
+    grid.classList.toggle('hidden', q !== '' && matches === 0);
+    totalMatches += matches;
+  });
+
+  if (q === '') {
+    status.classList.remove('show');
+  } else {
+    status.textContent = 'Найдено: ' + totalMatches;
+    status.classList.add('show');
+  }
+}
+
+
+function clearSearch() {
+  const input = document.getElementById('searchInput');
+  input.value = '';
+  filterArtists('');
+  input.focus();
+}
+
+function enterSearchMode() {
+  document.body.classList.add('search-mode');
+  document.getElementById('searchCancel').classList.add('show');
+}
+
+function exitSearch() {
+  const input = document.getElementById('searchInput');
+  input.value = '';
+  filterArtists('');
+  input.blur();
+  document.body.classList.remove('search-mode');
+  document.getElementById('searchCancel').classList.remove('show');
+  window.scrollTo(0, 0);
+}
+
+(function initSearchUX() {
+  const input = document.getElementById('searchInput');
+  input.addEventListener('focus', enterSearchMode);
+  input.addEventListener('blur', function() {
+    setTimeout(function() {
+      if (input.value.trim() === '' && document.activeElement !== input) {
+        document.body.classList.remove('search-mode');
+        document.getElementById('searchCancel').classList.remove('show');
+      }
+    }, 150);
+  });
+})();
 
 function copyName(btn) {
   const name = btn.getAttribute('data-name');

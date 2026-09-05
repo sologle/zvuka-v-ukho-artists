@@ -2,7 +2,7 @@
 
 const CATEGORY_META = Object.freeze([
   Object.freeze({ key: "popular", title: "🔥 Популярные", sectionId: "categoryPopular" }),
-  Object.freeze({ key: "cis", title: "СНГ артисты", sectionId: "categoryCis" }),
+  Object.freeze({ key: "cis", title: "🎤 СНГ артисты", sectionId: "categoryCis" }),
   Object.freeze({ key: "world", title: "🌍 Мировые артисты", sectionId: "categoryWorld" }),
 ]);
 

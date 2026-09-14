@@ -15,14 +15,15 @@ class ArtistCatalogPageTests(unittest.TestCase):
         popular = catalog["popular"]
         cis = catalog["cis"]
         world = catalog["world"]
-        self.assertEqual(len(popular), 298)
-        self.assertEqual(len(cis), 476)
+        self.assertEqual(len(popular), 297)
+        self.assertEqual(len(cis), 475)
         self.assertEqual(len(world), 1291)
         self.assertEqual(len(popular), len(set(popular)))
         self.assertEqual(len(cis), len(set(cis)))
         self.assertEqual(len(world), len(set(world)))
         self.assertTrue(set(popular) <= (set(cis) | set(world)))
         self.assertFalse(set(cis) & set(world))
+        self.assertNotIn("Face", popular + cis + world)
 
     def test_page_loads_external_assets_and_accessible_category_controls(self) -> None:
         page = (ROOT / "index.html").read_text(encoding="utf-8")

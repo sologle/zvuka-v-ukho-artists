@@ -600,3 +600,29 @@ body.search-mode .wrap {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* The partner view shares the catalogue and interactions with the primary bot. */
+html.brand-hitach {
+  --bg-1: #10130d;
+  --bg-2: #1b2315;
+  --bg-3: #0d100b;
+  --pink: #a8ef31;
+  --pink-soft: #c4f875;
+  --cyan: #9be52c;
+  --cyan-soft: #d4fa99;
+  --gold: #c4f875;
+  --text: #f5f8ee;
+  --muted: #c3ceb7;
+}
+html.brand-hitach, .brand-hitach body {
+  background: radial-gradient(circle at 15% 0%, #293d1a, var(--bg-2) 30%, var(--bg-1) 65%, var(--bg-3) 100%);
+}
+.brand-hitach .search-wrap { background: linear-gradient(180deg, rgba(16, 19, 13, .98) 0%, rgba(16, 19, 13, .98) 78%, rgba(16, 19, 13, 0) 100%); }
+.brand-hitach .logo { box-shadow: 0 0 0 2px #a8ef31, 0 5px 20px rgba(0, 0, 0, .35); }
+.brand-hitach .brand h1, .brand-hitach .brandline { background: none; color: #c4f875; }
+.brand-hitach .search-box:focus-within { border-color: #a8ef31; box-shadow: 0 0 0 3px rgba(168, 239, 49, .2); }
+.brand-hitach .intro { background: rgba(168, 239, 49, .09); }
+.brand-hitach .counter { border-color: rgba(168, 239, 49, .3); background: rgba(168, 239, 49, .08); }
+.brand-hitach .section-header { background: rgba(20, 27, 16, .98); }
+.brand-hitach .section .section-title { text-shadow: none; }
+.brand-hitach .section .chip:active { border-color: rgba(168, 239, 49, .65); background: rgba(168, 239, 49, .17); }
